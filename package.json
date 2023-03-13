@@ -2,9 +2,9 @@
   "name": "data-vali-ex",
   "version": "1.0.0",
   "description": "",
-  "main": "ex1.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon ex1.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

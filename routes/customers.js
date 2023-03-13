@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { Genre, validate } = require('../models/genres');
+const { Customer, validate } = require('../models/customers');
 
 router.get('/', async (req, res) => {
-  const genres = await Genre.find().sort('name');
-  res.send(genres);
+  const customers = await Customer.find().sort('name');
+  res.send(customers);
 });
 
 router.post('/', async (req, res) => {
@@ -13,9 +13,13 @@ router.post('/', async (req, res) => {
     res.status(400).send(error.details[0].message);
     return;
   }
-  let genre = new Genre({ name: req.body.name });
-  genre = await genre.save();
-  res.send(genre);
+  let customer = new Customer({
+    isGold: req.body.isGold,
+    name: req.body.name,
+    phone: req.body.phone,
+  });
+  customer = await customer.save();
+  res.send(customer);
 });
 
 router.put('/:id', async (req, res) => {
@@ -24,37 +28,39 @@ router.put('/:id', async (req, res) => {
     res.status(400).send(error.details[0].message);
     return;
   }
-  const genre = await Genre.findByIdAndUpdate(
+  const customer = await Customer.findByIdAndUpdate(
     req.params.id,
     {
       name: req.body.name,
+      name: req.body.name,
+      phone: req.body.phone,
     },
     { new: true }
   );
 
-  if (!genre) {
+  if (!customer) {
     return res.status(400).send('The course with the qiven id was not found');
   }
-  res.send(genre);
+  res.send(customer);
 });
 
 router.delete('/:id', async (req, res) => {
-  const genre = await Genre.findByIdAndRemove(req.params.id);
-  if (!genre) {
+  const customer = await Customer.findByIdAndRemove(req.params.id);
+  if (!customer) {
     res.status(400).send('The course with the qiven id was not found');
     return;
   }
 
-  res.send(genre);
+  res.send(customer);
 });
 
 router.get('/:id', async (req, res) => {
-  const genre = await Genre.findById(req.params.id);
-  if (!genre) {
+  const customer = await Customer.findById(req.params.id);
+  if (!customer) {
     res.status(400).send('The course with the qiven id was not found');
     return;
   }
-  res.send(genre);
+  res.send(customer);
 });
 
 module.exports = router;
