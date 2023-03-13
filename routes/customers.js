@@ -39,7 +39,7 @@ router.put('/:id', async (req, res) => {
   );
 
   if (!customer) {
-    return res.status(400).send('The course with the qiven id was not found');
+    return res.status(400).send('The customer with the qiven id was not found');
   }
   res.send(customer);
 });
@@ -47,7 +47,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const customer = await Customer.findByIdAndRemove(req.params.id);
   if (!customer) {
-    res.status(400).send('The course with the qiven id was not found');
+    res.status(400).send('The customer with the qiven id was not found');
     return;
   }
 
@@ -57,7 +57,7 @@ router.delete('/:id', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const customer = await Customer.findById(req.params.id);
   if (!customer) {
-    res.status(400).send('The course with the qiven id was not found');
+    res.status(400).send('The customer with the qiven id was not found');
     return;
   }
   res.send(customer);

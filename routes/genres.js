@@ -33,7 +33,7 @@ router.put('/:id', async (req, res) => {
   );
 
   if (!genre) {
-    return res.status(400).send('The course with the qiven id was not found');
+    return res.status(400).send('The genre with the qiven id was not found');
   }
   res.send(genre);
 });
@@ -41,7 +41,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const genre = await Genre.findByIdAndRemove(req.params.id);
   if (!genre) {
-    res.status(400).send('The course with the qiven id was not found');
+    res.status(400).send('The genre with the qiven id was not found');
     return;
   }
 
@@ -51,7 +51,7 @@ router.delete('/:id', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const genre = await Genre.findById(req.params.id);
   if (!genre) {
-    res.status(400).send('The course with the qiven id was not found');
+    res.status(400).send('The genre with the qiven id was not found');
     return;
   }
   res.send(genre);
