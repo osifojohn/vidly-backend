@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
   }
   const genre = await Genre.findById(req.body.genreId);
   if (!genre) {
-    return res.status(400).send('Invalid genre');
+    return res.status(400).send('Invalid movie');
   }
   let movie = new Movie({
     title: req.body.title,
@@ -49,15 +49,15 @@ router.put('/:id', async (req, res) => {
   );
 
   if (!movie) {
-    return res.status(400).send('The customer with the qiven id was not found');
+    return res.status(400).send('The movie with the qiven id was not found');
   }
   res.send(movie);
 });
 
 router.delete('/:id', async (req, res) => {
-  const movie = await Movie.findByIdAndRemove(req.params.id);
+  const movie = await Movie.findByIdAndRemove(req.params.genreId);
   if (!movie) {
-    res.status(400).send('The customer with the qiven id was not found');
+    res.status(400).send('The movie with the qiven id was not found');
     return;
   }
 
@@ -65,9 +65,9 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  const movie = await Movie.findById(req.params.id);
+  const movie = await Movie.findById(req.params.genreId);
   if (!movie) {
-    res.status(400).send('The customer with the qiven id was not found');
+    res.status(400).send('The movie with the qiven id was not found');
     return;
   }
   res.send(movie);
