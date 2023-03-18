@@ -24,12 +24,12 @@ const Genre = mongoose.model('Genre', genreSchema);
 //   })
 // );
 
-function validateGenre(movie) {
+function validateGenre(user) {
   const schema = Joi.object({
     name: Joi.string().min(3).required(),
   });
 
-  return schema.validate(movie, { abortEarly: false });
+  return schema.validate(user, { abortEarly: false });
 }
 
 exports.genreSchema = genreSchema;

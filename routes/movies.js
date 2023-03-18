@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { Movie, validate } = require('../models/movies');
+const { Movie, validate } = require('../models/movie');
 const { Genre } = require('../models/genres');
 
 router.get('/', async (req, res) => {
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
   if (!genre) {
     return res.status(400).send('Invalid movie');
   }
-  let movie = new Movie({
+  const movie = new Movie({
     title: req.body.title,
     numberInStock: req.body.numberInStock,
     dailyRental: req.body.dailyRental,
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
       name: genre.name,
     },
   });
-  movie = await movie.save();
+  await movie.save();
   res.send(movie);
 });
 
